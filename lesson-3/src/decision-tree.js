@@ -1,5 +1,6 @@
 const age = 10;
 const as = 11;
+const a = 5;
 const b = 15;
 const c = 3;
 //logging person seniority based on their age
@@ -15,7 +16,7 @@ if (age > 0 && age < 12) {
     console.log('Senior');
 }
 // comparison between a-b-c and looking for max number of 3
-if (a > b && a > c1) {
+if (a > b && a > c) {
     console.log(a);
 } else if (b > a && b > c) {
     console.log(b);
