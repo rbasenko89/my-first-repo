@@ -16,3 +16,11 @@ export function sumArray(arr: (number | string)[]): number {
 
     return sum;
 }
+const numbersArray: number[] = [10, 20, 30, 40];
+const stringsArray: string[] = ['5', '15', '25', '10'];
+
+const sumNumbers = sumArray(numbersArray);
+const sumStrings = sumArray(stringsArray);
+
+console.log('Сума числового масиву:', sumNumbers);
+console.log('Сума рядкового масиву:', sumStrings);
