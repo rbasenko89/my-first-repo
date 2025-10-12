@@ -40,6 +40,9 @@ const user = {
         const currentYear = new Date().getFullYear();
         return currentYear - this.birthYear;
     },
+    get city() {
+        return `${this.location.city}`;
+    },
 
     set city(newCity) {
         if (!newCity || typeof newCity !== 'string') {
