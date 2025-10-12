@@ -1,4 +1,4 @@
-export function sumArray(arr: (number | string)[]): number {
+export function sumArray(arr: number[] | string[]): number {
     let sum = 0;
 
     for (let i = 0; i < arr.length; i++) {
