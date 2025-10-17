@@ -1,0 +1,6 @@
+{
+    "spec": "tests/mocha/**/*.spec.ts",
+    "extension": ["ts"],
+    "require": ["ts-node/register", "tests/_setup/mocha.ts"],
+    "timeout": 5000
+}
