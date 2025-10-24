@@ -2,5 +2,6 @@
     "spec_dir": "tests/jasmine",
     "spec_files": ["**/*.spec.ts"],
     "helpers": [],
-    "random": false
+    "random": false,
+    "requires": ["ts-node/register"]
 }
