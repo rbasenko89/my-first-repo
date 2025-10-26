@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const professionalFactory_1 = require("../../src/factory/professionalFactory");
-const QA_junior_1 = require("../../src/roles/QA_junior");
-const QA_lead_1 = require("../../src/roles/QA_lead");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const professionalFactory_1 = require('../../src/factory/professionalFactory');
+const QA_junior_1 = require('../../src/roles/QA_junior');
+const QA_lead_1 = require('../../src/roles/QA_lead');
 describe('professionalFactory & QA_Junior.nextStep (Jasmine)', () => {
     it('professionalFactory() створює QA_lead з валідними полями', () => {
         const p = (0, professionalFactory_1.professionalFactory)({ name: 'Ira', path: 'QA_Lead', years: 8 });

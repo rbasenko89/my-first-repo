@@ -1,13 +1,13 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.professionalFactory = professionalFactory;
-const AQA_1 = require("../roles/AQA");
-const ExitIT_1 = require("../roles/ExitIT");
-const Manager_1 = require("../roles/Manager");
-const QA_junior_1 = require("../roles/QA_junior");
-const QA_lead_1 = require("../roles/QA_lead");
-const QA_mid_1 = require("../roles/QA_mid");
-const QA_sin_1 = require("../roles/QA_sin");
+const AQA_1 = require('../roles/AQA');
+const ExitIT_1 = require('../roles/ExitIT');
+const Manager_1 = require('../roles/Manager');
+const QA_junior_1 = require('../roles/QA_junior');
+const QA_lead_1 = require('../roles/QA_lead');
+const QA_mid_1 = require('../roles/QA_mid');
+const QA_sin_1 = require('../roles/QA_sin');
 function professionalFactory(dto) {
     switch (dto.path) {
         case 'QA_Jun':

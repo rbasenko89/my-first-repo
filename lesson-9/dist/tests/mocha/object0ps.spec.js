@@ -1,12 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const chai_1 = __importDefault(require("chai"));
-const assert_1 = __importDefault(require("assert"));
-const QA_mid_1 = require("../../src/roles/QA_mid");
-const objectOps_1 = require("../../src/utils/objectOps");
+'use strict';
+var __importDefault =
+    (this && this.__importDefault) ||
+    function (mod) {
+        return mod && mod.__esModule ? mod : { default: mod };
+    };
+Object.defineProperty(exports, '__esModule', { value: true });
+const chai_1 = __importDefault(require('chai'));
+const assert_1 = __importDefault(require('assert'));
+const QA_mid_1 = require('../../src/roles/QA_mid');
+const objectOps_1 = require('../../src/utils/objectOps');
 const { expect } = chai_1.default;
 describe('objectOps (Mocha)', () => {
     it('toDTO() формує правильні поля', () => {

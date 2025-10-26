@@ -1,9 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.QA_Jun = exports.QA_Junior = void 0;
-const QA_1 = require("../abstractions/QA");
-const types_1 = require("../types/types");
-const QA_mid_1 = require("./QA_mid");
+const QA_1 = require('../abstractions/QA');
+const types_1 = require('../types/types');
+const QA_mid_1 = require('./QA_mid');
 class QA_Junior extends QA_1.QA {
     constructor(name, years = 0) {
         super(name, types_1.Level.Jun, years);

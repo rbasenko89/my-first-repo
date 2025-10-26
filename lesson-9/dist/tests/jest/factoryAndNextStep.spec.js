@@ -1,10 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const professionalFactory_1 = require("../../src/factory/professionalFactory");
-const QA_junior_1 = require("../../src/roles/QA_junior");
-const QA_mid_1 = require("../../src/roles/QA_mid");
-const QA_lead_1 = require("../../src/roles/QA_lead");
-const chai_1 = require("chai");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const professionalFactory_1 = require('../../src/factory/professionalFactory');
+const QA_junior_1 = require('../../src/roles/QA_junior');
+const QA_mid_1 = require('../../src/roles/QA_mid');
+const QA_lead_1 = require('../../src/roles/QA_lead');
+const chai_1 = require('chai');
 describe('professionalFactory & QA_Junior.nextStep (Jest + Chai)', () => {
     test('professionalFactory() створює QA_Lead', () => {
         const p = (0, professionalFactory_1.professionalFactory)({ name: 'Ira', path: 'QA_Lead', years: 8 });

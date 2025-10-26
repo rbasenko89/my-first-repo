@@ -1,5 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.processCareer = processCareer;
 function processCareer(pro) {
     const sal = pro.salary();
@@ -10,8 +10,7 @@ function processCareer(pro) {
     if (next) {
         console.log('   Next step suggestion:');
         console.log(`   ${next.describe()}`);
-    }
-    else {
+    } else {
         console.log('   No further suggested step.');
     }
 }

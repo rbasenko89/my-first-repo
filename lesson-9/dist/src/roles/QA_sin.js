@@ -1,9 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.QA_Sin = void 0;
-const QA_1 = require("../abstractions/QA");
-const types_1 = require("../types/types");
-const QA_lead_1 = require("./QA_lead");
+const QA_1 = require('../abstractions/QA');
+const types_1 = require('../types/types');
+const QA_lead_1 = require('./QA_lead');
 class QA_Sin extends QA_1.QA {
     constructor(name, years = 4) {
         super(name, types_1.Level.Sin, years);

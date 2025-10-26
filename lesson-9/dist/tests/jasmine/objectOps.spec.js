@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const chai_1 = require("chai"); // Chai-асершени в Jasmine
-const QA_junior_1 = require("../../src/roles/QA_junior");
-const objectOps_1 = require("../../src/utils/objectOps");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const chai_1 = require('chai'); // Chai-асершени в Jasmine
+const QA_junior_1 = require('../../src/roles/QA_junior');
+const objectOps_1 = require('../../src/utils/objectOps');
 describe('objectOps (Jasmine)', () => {
     it('toDTO() має виробляти DTO без мутацій', () => {
         const p = new QA_junior_1.QA_Junior('Oksana', 1);

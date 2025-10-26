@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const QA_sin_1 = require("../../src/roles/QA_sin");
-const chai_1 = require("chai");
-const objectOps_1 = require("../../src/utils/objectOps");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const QA_sin_1 = require('../../src/roles/QA_sin');
+const chai_1 = require('chai');
+const objectOps_1 = require('../../src/utils/objectOps');
 describe('objectOps (Jest)', () => {
     test('toDTO() генерує опис та зарплату', () => {
         const p = new QA_sin_1.QA_Sin('Olha', 6);

@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const professionalFactory_1 = require("./factory/professionalFactory");
-const QA_junior_1 = require("./roles/QA_junior");
-const processCareer_1 = require("./utils/processCareer");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const professionalFactory_1 = require('./factory/professionalFactory');
+const QA_junior_1 = require('./roles/QA_junior');
+const processCareer_1 = require('./utils/processCareer');
 console.log('=== Demo ===');
 const people = [
     (0, professionalFactory_1.professionalFactory)({ name: 'Oksana', path: 'QA_Jun', years: 1 }),

@@ -1,13 +1,15 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const professionalFactory_1 = require("../../src/factory/professionalFactory");
-const QA_junior_1 = require("../../src/roles/QA_junior");
-const QA_mid_1 = require("../../src/roles/QA_mid");
-const QA_lead_1 = require("../../src/roles/QA_lead");
-const chai_1 = __importDefault(require("chai"));
+'use strict';
+var __importDefault =
+    (this && this.__importDefault) ||
+    function (mod) {
+        return mod && mod.__esModule ? mod : { default: mod };
+    };
+Object.defineProperty(exports, '__esModule', { value: true });
+const professionalFactory_1 = require('../../src/factory/professionalFactory');
+const QA_junior_1 = require('../../src/roles/QA_junior');
+const QA_mid_1 = require('../../src/roles/QA_mid');
+const QA_lead_1 = require('../../src/roles/QA_lead');
+const chai_1 = __importDefault(require('chai'));
 const { expect } = chai_1.default;
 describe('professionalFactory & QA_Junior.nextStep (Mocha + Chai)', () => {
     it('professionalFactory() створює QA_Lead', () => {

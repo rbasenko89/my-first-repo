@@ -1,9 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.QA_Lead = void 0;
-const QA_1 = require("../abstractions/QA");
-const types_1 = require("../types/types");
-const Manager_1 = require("./Manager");
+const QA_1 = require('../abstractions/QA');
+const types_1 = require('../types/types');
+const Manager_1 = require('./Manager');
 class QA_Lead extends QA_1.QA {
     constructor(name, years = 6) {
         super(name, types_1.Level.Lead, years);
