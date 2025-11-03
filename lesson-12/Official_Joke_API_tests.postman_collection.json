@@ -1,0 +1,671 @@
+{
+	"info": {
+		"_postman_id": "ff26d0c0-6d67-40a1-84f1-80327a198265",
+		"name": "Official_Joke_API_tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49746833",
+		"_collection_link": "https://rbasenko89-2659642.postman.co/workspace/Ramella's-Workspace~bd9401b4-1bd2-4c7c-89ad-c6865146c334/collection/49746833-ff26d0c0-6d67-40a1-84f1-80327a198265?action=share&source=collection_link&creator=49746833"
+	},
+	"item": [
+		{
+			"name": "1. Random Joke response general validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"const body = pm.response.json();",
+							"pm.test(\"Valid Joke object\", () => {",
+							"    return body",
+							"        && typeof body.id === 'number'",
+							"        && typeof body.type === 'string' && body.type.length > 0",
+							"        && typeof body.setup === 'string' && body.setup.length > 0",
+							"        && typeof body.punchline === 'string' && body.punchline.length > 0;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/random_joke",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"random_joke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. Random joke is an array or single joke array",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const body = pm.response.json();",
+							"pm.test(\"Object or single-element array with valid joke\", () => {",
+							"    if (Array.isArray(body)) {",
+							"        return body.length === 1",
+							"            && typeof body[0]?.id === 'number'",
+							"            && typeof body[0]?.type === 'string' && body[0].type.length > 0",
+							"            && typeof body[0]?.setup === 'string' && body[0].setup.length > 0",
+							"            && typeof body[0]?.punchline === 'string' && body[0].punchline.length > 0;",
+							"    } else {",
+							"        return typeof body.id === 'number'",
+							"            && typeof body.type === 'string' && body.type.length > 0",
+							"            && typeof body.setup === 'string' && body.setup.length > 0",
+							"            && typeof body.punchline === 'string' && body.punchline.length > 0;",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/jokes/random",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. Jokes types returns array with unique values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const types = pm.response.json();",
+							"pm.test(\"Non-empty array of unique strings\", () => {",
+							"    if (!Array.isArray(types) || types.length === 0) return false;",
+							"    const allStrings = types.every(t => typeof t === 'string' && t.length > 0);",
+							"    const unique = new Set(types).size === types.length;",
+							"    return allStrings && unique;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/types",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. Random 10 returns array with 10 values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const arr = pm.response.json();",
+							"pm.test(\"Exactly 10 valid jokes\", () => {",
+							"    return Array.isArray(arr)",
+							"        && arr.length === 10",
+							"        && arr.every(j =>",
+							"            j && typeof j.id === 'number'",
+							"            && typeof j.type === 'string' && j.type.length > 0",
+							"            && typeof j.setup === 'string' && j.setup.length > 0",
+							"            && typeof j.punchline === 'string' && j.punchline.length > 0",
+							"        );",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/random_ten",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"random_ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. Random 5 jokes returns valid number of jokes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"const arr = pm.response.json();",
+							"const expected = 3;",
+							"pm.test(`Exactly ${expected} valid jokes`, () => {",
+							"    return Array.isArray(arr)",
+							"        && arr.length === expected",
+							"        && arr.every(j =>",
+							"            j && typeof j.id === 'number'",
+							"            && typeof j.type === 'string' && j.type.length > 0",
+							"            && typeof j.setup === 'string' && j.setup.length > 0",
+							"            && typeof j.punchline === 'string' && j.punchline.length > 0",
+							"        );",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/jokes/random/4",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"jokes",
+						"random",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. All 10 returned jokes are unique (based on setup value)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const arr = pm.response.json();",
+							"pm.test(\"All `setup` values are unique (case-insensitive, trimmed)\", () => {",
+							"    if (!Array.isArray(arr)) return true; ",
+							"    const setups = arr.map(j => typeof j?.setup === 'string' ? j.setup.trim().toLowerCase() : j?.setup);",
+							"    const uniqueCount = new Set(setups).size;",
+							"    if (uniqueCount !== setups.length) {",
+							"        // Highlight duplicates in the Postman console",
+							"        const counts = setups.reduce((acc, s) => (acc[s] = (acc[s] || 0) + 1, acc), {});",
+							"        const dups = Object.entries(counts).filter(([, c]) => c > 1).map(([s, c]) => `${s} ×${c}`);",
+							"        console.warn(\"Duplicate `setup` values:\", dups);",
+							"    }",
+							"    return uniqueCount === setups.length;",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/random_ten",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"random_ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. /jokes/ten returns 10 values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const arr = pm.response.json();",
+							"pm.test(\"Exactly 10 valid jokes\", () => {",
+							"    return Array.isArray(arr)",
+							"        && arr.length === 10",
+							"        && arr.every(j =>",
+							"            j && typeof j.id === 'number'",
+							"            && typeof j.type === 'string' && j.type.length > 0",
+							"            && typeof j.setup === 'string' && j.setup.length > 0",
+							"            && typeof j.punchline === 'string' && j.punchline.length > 0",
+							"        );",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/jokes/ten",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"jokes",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. Response contains random joke of general type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const body = pm.response.json();",
+							"const expectedType = \"general\";",
+							"pm.test(\"Exactly 1 joke of requested type\", () => {",
+							"    if (Array.isArray(body)) {",
+							"        return body.length === 1",
+							"            && typeof body[0]?.id === 'number'",
+							"            && typeof body[0]?.type === 'string' && body[0].type === expectedType",
+							"            && typeof body[0]?.setup === 'string' && body[0].setup.length > 0",
+							"            && typeof body[0]?.punchline === 'string' && body[0].punchline.length > 0;",
+							"    } else {",
+							"        return typeof body.id === 'number'",
+							"            && typeof body.type === 'string' && body.type === expectedType",
+							"            && typeof body.setup === 'string' && body.setup.length > 0",
+							"            && typeof body.punchline === 'string' && body.punchline.length > 0;",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/jokes/191",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"jokes",
+						"191"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9. Joke has desired id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"let joke;",
+							"pm.test(\"Body is valid JSON object\", function () {",
+							"  joke = pm.response.json();",
+							"  pm.expect(joke).to.be.an(\"object\");",
+							"});",
+							"",
+							"",
+							"const expectedId = Number(191);",
+							"",
+							"pm.test(\"ID matches requested and shape is valid\", function () {",
+							"  pm.expect(joke).to.have.property(\"id\").that.is.a(\"number\");",
+							"  pm.expect(joke.id, \"ID mismatch\").to.eql(expectedId);",
+							"",
+							"  pm.expect(joke).to.have.property(\"type\").that.is.a(\"string\").and.not.empty;",
+							"  pm.expect(joke).to.have.property(\"setup\").that.is.a(\"string\").and.not.empty;",
+							"  pm.expect(joke).to.have.property(\"punchline\").that.is.a(\"string\").and.not.empty;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/jokes/194",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"jokes",
+						"194"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. Ten jokes of desired type in response",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"if (pm.response.code !== 200) {",
+							"  throw new Error(`Expected 200, got ${pm.response.code}`);",
+							"}",
+							"",
+							"pm.test(\"Content-Type is JSON\", function () {",
+							"  pm.response.to.have.header(\"Content-Type\");",
+							"  pm.expect(pm.response.headers.get(\"Content-Type\").toLowerCase())",
+							"    .to.include(\"application/json\");",
+							"});",
+							"",
+							"pm.test(\"Response time < 800ms\", function () {",
+							"  pm.expect(pm.response.responseTime).to.be.below(800);",
+							"});",
+							"",
+							"const arr = pm.response.json();",
+							"",
+							"const expectedType = (\"general\");",
+							"pm.test(\"10 jokes and all match requested type\", () => {",
+							"    return Array.isArray(arr)",
+							"        && arr.length === 10",
+							"        && arr.every(j =>",
+							"            j && typeof j.id === 'number'",
+							"            && typeof j.type === 'string' && j.type === expectedType",
+							"            && typeof j.setup === 'string' && j.setup.length > 0",
+							"            && typeof j.punchline === 'string' && j.punchline.length > 0",
+							"        );",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://official-joke-api.appspot.com/jokes/general/ten",
+					"protocol": "https",
+					"host": [
+						"official-joke-api",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"jokes",
+						"general",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
