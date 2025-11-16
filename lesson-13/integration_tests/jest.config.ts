@@ -1,10 +1,8 @@
 import type { Config } from "jest";
-
 const config: Config = {
   preset: "ts-jest",
   testEnvironment: "node",
   setupFiles: ["dotenv/config"],
-  testMatch: ["**/*.test.ts", "**/*.int.test.ts"],
+  transform: { "^.+\\.tsx?$": ["ts-jest", { tsconfig: "tsconfig.json" }] },
 };
-
 export default config;

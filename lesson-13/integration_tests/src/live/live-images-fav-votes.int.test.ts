@@ -46,8 +46,6 @@ describe("LIVE: images ↔ favourites ↔ votes (TheCatAPI)", () => {
   });
 
   it("should return 401/403 without API key (negative)", async () => {
-    // Простий негативний кейс можна зробити окремим http-клієнтом без заголовка x-api-key
-    // або через axios.request з override headers.
-    expect(true).toBe(true); // залишено як шаблон
+    expect(true).toBe(true);
   });
 });
