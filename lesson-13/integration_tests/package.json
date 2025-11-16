@@ -1,0 +1,25 @@
+{
+  "name": "integration_tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:pact": "jest --runInBand src/pact/*.test.ts",
+    "test:live": "jest --runInBand src/live/*.int.test.ts",
+    "pact:publish": "pact-broker publish ./pact/pacts --consumer-app-version $(git rev-parse --short HEAD) --branch main --broker-base-url $PACT_BROKER_BASE_URL --broker-token $PACT_BROKER_TOKEN",
+    "pact:verify:provider": "pact-provider-verifier --provider-base-url=http://localhost:8080 --pact-url=./pact/pacts/*",
+    "test:pact:petstore": "jest --runInBand src/pact/petstore.consumer.pact.test.ts",
+    "pact:verify:petstore": "pact-provider-verifier --provider-base-url https://petstore.swagger.io/v2 ./pact/pacts/qa-consumer-petstore-petstore.json"
+  },
+  "devDependencies": {
+    "@pact-foundation/pact": "^16.0.2",
+    "@pact-foundation/pact-node": "^10.18.0",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^24.10.1",
+    "axios": "^1.13.2",
+    "dotenv": "^16.6.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.9.3"
+  }
+}
