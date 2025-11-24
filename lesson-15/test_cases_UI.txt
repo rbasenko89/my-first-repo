@@ -1,0 +1,65 @@
+Тест-кейси з селекторами (5 прикладів для UI-автотестів)
+Сайт: https://www.istqb.org
+Примітка: селектори підібрані за реальною структурою сайту (XPath), прекондішн до всіх тестів - перейти на головну сторінку сайту
+
+
+1. Пошук сертифікації через глобальний пошук
+Кроки:
+- Клікнути по полю пошуку
+Селектор: //input[@id='s'].click
+- У полі пошуку ввести текст "CTFL"
+ Селектор: //input[@id='s'] → вводимо "CTFL"
+- Натиснути кнопку Search
+ Селектор: //div[contains(@class,'flex-col')]//div[contains(@class,'flex-col')]//button[@type='submit']//i[contains(@class,'icon-search')] 
+- Очікувати, що з’явились результати
+Селектор очікуваних елементів: //div/h1/span[text()='CTFL']
+
+Очікуваний результат: показано список результатів, де є згадка “CTFL”.
+
+2. Перевірка навігації: відкриття сторінки “What we do”
+Кроки:
+Навести курсор на меню “About”
+Селектор: //li[@id='menu-item-33']//a[@class='nav-top-link']
+У випадаючому меню клікнути “What we do”
+Селектор: //li[@id='menu-item-33']//a[@href='/what-we-do/']
+
+Очікуваний результат: відкривається сторінка з URL https://istqb.org/what-we-do/
+
+
+3. Відкриття списку тренінг-провайдерів
+Кроки:
+У головному меню натиснути “Trainings&Exams”
+Селектор: //li[@id='menu-item-35']//a[@class='nav-top-link']
+В меню натиснути кнопку “Find a training provider”
+Селектор: //div[@id='text-2320459868'] 
+Очікувати сторінку провайдерів (тайтл таблиці з відповідним текстом) Селектор: //h2[@class='text-lg font-semibold' and text()='Find any of the many ISTQB® Accredited Training Providers worldwide']
+
+Очікуваний результат: відображено таблицю з accredited training providers.
+
+4. Пошук провайдерів екзаменів за країною
+Кроки:
+Перейти в меню → “Trainings&Exams” → “Exam Providers”
+Селектор: //li[@id='menu-item-35']//a[@class='nav-top-link']
+В меню натиснути кнопку “Find an Exam provider”
+Селектор: //div[@id='text-30925615']
+У фільтрі вибрати країну Poland
+Селектор : //div[@id='desktop-dropdowns']//div[@class='relative']//input[@placeholder='Countries of Operation'] -> дропдаун
+Натиснути Search
+Селектор: 
+Очікуємо результати (список провайдерів по обраній країні)
+Селектор: //div[@id='desktop-results']
+Відкриваємо More Info  (відкривається перший провайдер та його Info ) 
+Селектор: //div[@id='desktop-results']//button 
+
+Очікуваний результат: В інфо вказана Польща - селектор знаходить елемент з таким текстом 
+Селектор  //div[@class='mb-4' and contains(., 'Poland')]
+
+
+5. Валідація лінки New  (footer)
+Кроки:
+Прокрутити в футер до Info -> News 
+Селектор: //a[@href='/news'] 
+Клікнути і перейти на сторінку з новинами 
+
+Очікуваний результат: сторінка з новинами і селектор на ній //div[@id='text-2134009201']//h1[contains (.,'Our News')]
+
